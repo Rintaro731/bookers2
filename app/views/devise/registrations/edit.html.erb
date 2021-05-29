@@ -1,0 +1,19 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+    <% if @minimum_password_length %>
+
